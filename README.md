@@ -1,4 +1,8 @@
-# README
+Monte cinema🎥
+This application allows you to book tickets for screenings at the Monte Cinema.
+
+
+#README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
