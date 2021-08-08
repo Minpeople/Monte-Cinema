@@ -2,75 +2,46 @@
 
 class CinemaHallsController < ApplicationController
 	def index 
-		@cinema_halls = Cinema_hall.all
-
-		respond_to do |format|
-			format.html  
-			format.json  { render :json => @cinema_halls }
-		end
+		@cinema_halls = CinemaHall.all
+		render json: @cinema_halls
 	end
 
-	def new
-		@cinema_hall = Cinema_hall.new
-		respond_to do |format|
-			format.html  
-			format.json  { render :json => @cinema_hall }
-		end
-
 	def create
-		@cinema_hall = Cinema_hall.new(cinema_hall_params)
+		@cinema_hall = CinemaHall.new(cinema_hall_params)
 
-  	respond_to do |format|
-			if @cinema_hall.save
-				format.html  { redirect_to(@cinema_hall,
-											:notice => 'Cinema hall was successfully created.') }
-				format.json  { render :json => @cinema_hall,
-											:status => :created, :location => @cinema_hall }
-			else
-				format.html  { render :action => "new" }
-				format.json  { render :json => @cinema_hall.errors,
-											:status => :unprocessable_entity }
-			end
-  	end
+		if @cinema_hall.save
+			render json: @cinema_halls,
+				status: :created, location: @cinema_hall 
+		else
+			render json: @cinema_halls.errors,
+				status: :unprocessable_entity
+		end
 	end
 
 	def show 
-		@cinema_hall = Cinema_hall.find(params[:id])
- 
-		respond_to do |format|
-			format.html  
-			format.json  { render :json => @cinema_hall }
-		end
-	end
-
-	def edit
-		@cinema_hall = Cinema_hall.find(params[:id])
+		@cinema_hall = CinemaHall.find(params[:id])
+		render json: @cinema_halls
+	rescue ActiveRecord::RecordNotFound => exception
+		render json: {error: exception.message}, status: :not_found 
 	end
 
 	def update
-		respond_to do |format|
-      if @cinema_hall.update(cinema_hall_params)
-        format.html { redirect_to @cinema_hall, notice: "Cinema hall was successfully updated." }
-				format.json { render :show, status: :ok, location: @cinema_hall }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cinema_hall.errors, status: :unprocessable_entity }
-      end
+    if @cinema_hall.update(cinema_hall_params)
+			render json: :show, status: :ok, location: @cinema_hall 
+    else
+      render json: @cinema_hall.errors, status: :unprocessable_entity 
     end
 	end
 
 	def destroy
-		@cinema_hall = Cinema_hall.find(params[:id])
+		@cinema_hall = CinemaHall.find(params[:id])
 		@cinema_hall.destroy
-	 
-		respond_to do |format|
-			format.html { redirect_to cinema_halls_url }
-			format.json { head :no_content }
-		end
+
+	  head :no_content 
 	end
 
 	private
 	def cinema_hall_params
-		params.require(:cinema_hall).permit(:name, :capacity )
+		params.require(:cinema_hall).permit(:name, :capacity)
 	end
 end
