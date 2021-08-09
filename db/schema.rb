@@ -1,3 +1,7 @@
+
+# frozen_string_literal: true
+
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,21 +14,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_123238) do
-
-  create_table "cinema_halls", force: :cascade do |t|
-    t.string "name"
-    t.integer "capacity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema.define(version: 20_210_808_180_355) do
+  create_table 'cinema_halls', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'capacity'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.text 'seats'
   end
 
-  create_table "screenings", force: :cascade do |t|
-    t.datetime "date"
-    t.integer "cinema_hall_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cinema_hall_id"], name: "index_screenings_on_cinema_hall_id"
+  create_table 'screenings', force: :cascade do |t|
+    t.datetime 'date'
+    t.integer 'cinema_hall_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['cinema_hall_id'], name: 'index_screenings_on_cinema_hall_id'
   end
-
 end
