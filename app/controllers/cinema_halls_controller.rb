@@ -36,7 +36,7 @@ class CinemaHallsController < ApplicationController
   def destroy
     @cinema_hall = CinemaHall.find(params[:id])
     @cinema_hall.destroy
-
+    
     head :no_content
   end
 
