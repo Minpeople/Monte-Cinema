@@ -30,4 +30,5 @@ ActiveRecord::Schema.define(version: 20_210_808_180_355) do
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['cinema_hall_id'], name: 'index_screenings_on_cinema_hall_id'
   end
+  
 end
