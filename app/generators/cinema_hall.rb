@@ -9,7 +9,6 @@ module Generators
       (1..capacity / AVAILABLE_COLUMNS.count).each do |row|
         AVAILABLE_COLUMNS.each { |column| seats.push("#{row}#{column}") }
       end
-
       seats
     end
   end
