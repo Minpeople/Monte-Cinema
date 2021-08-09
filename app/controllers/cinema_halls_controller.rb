@@ -5,7 +5,7 @@ class CinemaHallsController < ApplicationController
 		@cinema_halls = CinemaHall.all
 		render json: @cinema_halls
 	end
-
+  
 	def create
 		@cinema_hall = CinemaHall.new(cinema_hall_params)
 
@@ -36,7 +36,6 @@ class CinemaHallsController < ApplicationController
 	def destroy
 		@cinema_hall = CinemaHall.find(params[:id])
 		@cinema_hall.destroy
-    
 	  head :no_content 
 	end
 
