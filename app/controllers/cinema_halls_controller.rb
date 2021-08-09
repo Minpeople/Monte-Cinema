@@ -36,10 +36,12 @@ class CinemaHallsController < ApplicationController
 	def destroy
 		@cinema_hall = CinemaHall.find(params[:id])
 		@cinema_hall.destroy
+    
 	  head :no_content 
 	end
 
 	private
+  
 	def cinema_hall_params
 		params.require(:cinema_hall).permit(:name, :capacity)
 	end
