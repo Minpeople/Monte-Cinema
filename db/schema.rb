@@ -16,15 +16,15 @@
 
 ActiveRecord::Schema.define(version: 20_210_808_180_355) do
   create_table 'cinema_halls', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'capacity'
+    t.string 'name', null: false 
+    t.integer 'capacity', null: false 
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.text 'seats'
   end
 
   create_table 'screenings', force: :cascade do |t|
-    t.datetime 'date'
+    t.datetime 'date', null: false 
     t.integer 'cinema_hall_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
