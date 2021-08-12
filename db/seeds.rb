@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+cinema_hall = CinemaHall.create([{name: 'Suzuki', capacity: 200},
+                                 { name: 'Yamata', capacity: 100},
+                                 { name: 'Katana', capacity: 50},
+                                 { name: 'Chiisai', capacity: 20}])
+
+seats = CinemaHalls::GenerateSeats.new.generate_seats(cinema_hall.capacity)
+seats.each do |seat|
+    cinema_hall.seats.create(code: seat)
+end
