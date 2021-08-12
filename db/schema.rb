@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-  create_table 'cinema_halls', force: :cascade do |t|
-    t.string 'name', null: false 
-    t.integer 'capacity', null: false 
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.text 'seats'
+ActiveRecord::Schema.define(version: 2021_08_12_111904) do
+
+  create_table "cinema_halls", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "capacity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "movies", force: :cascade do |t|
@@ -24,6 +25,7 @@
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
   create_table "screenings", force: :cascade do |t|
     t.datetime "date", null: false
     t.integer "cinema_hall_id", null: false
@@ -44,5 +46,4 @@
 
   add_foreign_key "screenings", "movies"
   add_foreign_key "seats", "cinema_halls"
-
 end
