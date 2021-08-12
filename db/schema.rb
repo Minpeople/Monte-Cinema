@@ -10,18 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_123938) do
+ActiveRecord::Schema.define(version: 2021_08_12_190334) do
 
   create_table "cinema_halls", force: :cascade do |t|
     t.string "name", null: false
     t.integer "capacity", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "movies", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "duration", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -31,9 +24,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_123938) do
     t.integer "cinema_hall_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "movie_id", null: false
     t.index ["cinema_hall_id"], name: "index_screenings_on_cinema_hall_id"
-    t.index ["movie_id"], name: "index_screenings_on_movie_id"
   end
 
   create_table "seats", force: :cascade do |t|
@@ -52,10 +43,10 @@ ActiveRecord::Schema.define(version: 2021_08_12_123938) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "role", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "screenings", "movies"
   add_foreign_key "seats", "cinema_halls"
 end
