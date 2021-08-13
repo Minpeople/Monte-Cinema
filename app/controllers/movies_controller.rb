@@ -2,8 +2,8 @@
 
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.all
-    render json: @movies
+    movies = Movie.all
+    render json: movies
   end
 
   def show
@@ -12,13 +12,13 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    movie = Movie.new(movie_params)
 
-    if @movie.save
-      render json: @movie,
+    if movie.save
+      render json: movie,
               status: :created
     else
-      render json: @movie.errors,
+      render json: movie.errors,
               status: :unprocessable_entity
     end
   end
@@ -33,8 +33,8 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
-    @movie.destroy
+    movie = Movie.find(params[:id])
+    movie.destroy
     
     head :no_content
   end
