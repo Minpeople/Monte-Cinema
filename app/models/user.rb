@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum role {
+  enum role: {
           client: "client",
           admin: "admin"
         }
