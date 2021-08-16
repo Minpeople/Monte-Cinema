@@ -22,7 +22,7 @@ include JSONAPI::Fetching
 
   def show
     @cinema_hall = CinemaHall.find(params[:id])
-    render json: @cinema_halls
+    render json: @cinema_hall
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: e.message }, status: :not_found
   end
