@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CinemaHallsController < ApplicationController
-include JSONAPI::Fetching
+  include JSONAPI::Fetching
 
   def index
     @cinema_halls = CinemaHall.all
@@ -22,7 +22,7 @@ include JSONAPI::Fetching
 
   def show
     @cinema_hall = CinemaHall.find(params[:id])
-    render json: @cinema_halls
+    render jsonapi: @cinema_hall
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: e.message }, status: :not_found
   end
