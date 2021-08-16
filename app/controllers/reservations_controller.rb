@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ReservationsController < ApplicationController
+  before_action :set_reservation, only: [:show, :destroy]
+  
   def index
     @reservations = Reservation.all
     render json: @reservations
@@ -36,5 +38,9 @@ class ReservationsController < ApplicationController
   
   def reservation_params
     params.require(:reservation).permit(:status, :user_id, :screening_id)
+  end
+  
+  def set_reservation
+    @reservation = reservation.find(params[:id])
   end
 end
