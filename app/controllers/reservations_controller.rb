@@ -41,6 +41,6 @@ class ReservationsController < ApplicationController
   end
   
   def set_reservation
-    @reservation = reservation.find(params[:id])
+    @reservation = Reservation.find(params[:id])
   end
 end
