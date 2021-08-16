@@ -100,6 +100,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
+    pg (0.18.4)
     puma (5.4.0)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -182,11 +183,12 @@ DEPENDENCIES
   byebug
   devise (~> 4.2)
   listen (~> 3.3)
+  pg
   puma (~> 5.0)
   rails (~> 6.1.4)
   rubocop (~> 1.18, >= 1.18.4)
   spring (~> 1.7, >= 1.7.2)
-  sqlite3 (~> 1.4)
+  sqlite3
   tzinfo-data
 
 RUBY VERSION
