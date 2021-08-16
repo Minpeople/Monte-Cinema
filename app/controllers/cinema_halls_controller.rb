@@ -11,7 +11,7 @@ class CinemaHallsController < ApplicationController
 
     if @cinema_hall.save
       render json: @cinema_halls,
-             status: :created, location: @cinema_hall
+             status: :created
     else
       render json: @cinema_halls.errors,
              status: :unprocessable_entity
@@ -27,7 +27,7 @@ class CinemaHallsController < ApplicationController
 
   def update
     if @cinema_hall.update(cinema_hall_params)
-      render json: :show, status: :ok, location: @cinema_hall
+      render json: :show, status: :ok
     else
       render json: @cinema_hall.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class CinemaHallsController < ApplicationController
   def destroy
     @cinema_hall = CinemaHall.find(params[:id])
     @cinema_hall.destroy
-    
+
     head :no_content
   end
 
@@ -45,5 +45,4 @@ class CinemaHallsController < ApplicationController
   def cinema_hall_params
     params.require(:cinema_hall).permit(:name, :capacity)
   end
-
 end
