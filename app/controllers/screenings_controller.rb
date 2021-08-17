@@ -3,7 +3,7 @@
 class ScreeningsController < ApplicationController
   include JSONAPI::Fetching
 
-  def index 
+  def index
     screenings = Screening.all
     render jsonapi: screenings
   end
