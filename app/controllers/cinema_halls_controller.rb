@@ -22,10 +22,6 @@ class CinemaHallsController < ApplicationController
 
   def show
     @cinema_hall = CinemaHall.find(params[:id])
-<<<<<<< HEAD
-=======
-
->>>>>>> 33672204649ee2bda59b5d9d7d1e62524225e09a
     render jsonapi: @cinema_hall
   rescue ActiveRecord::RecordNotFound => e
     render jsonapi: { error: e.message }, status: :not_found
