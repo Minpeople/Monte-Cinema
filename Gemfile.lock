@@ -196,8 +196,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   devise (~> 4.2)
-  jsonapi-serializer
-  jsonapi.rb
+  jsonapi.rb (~> 1.7)
   listen (~> 3.3)
   pg
   pry (~> 0.14.1)

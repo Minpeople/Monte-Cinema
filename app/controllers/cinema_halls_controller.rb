@@ -12,10 +12,10 @@ class CinemaHallsController < ApplicationController
     @cinema_hall = CinemaHall.new(cinema_hall_params)
 
     if @cinema_hall.save
-      render json: @cinema_halls,
+      render jsonapi: @cinema_halls,
              status: :created
     else
-      render json: @cinema_halls.errors,
+      render jsonapi: @cinema_halls.errors,
              status: :unprocessable_entity
     end
   end
@@ -24,14 +24,14 @@ class CinemaHallsController < ApplicationController
     @cinema_hall = CinemaHall.find(params[:id])
     render jsonapi: @cinema_hall
   rescue ActiveRecord::RecordNotFound => e
-    render json: { error: e.message }, status: :not_found
+    render jsonapi: { error: e.message }, status: :not_found
   end
 
   def update
     if @cinema_hall.update(cinema_hall_params)
-      render json: :show, status: :ok
+      render jsonapi: :show, status: :ok
     else
-      render json: @cinema_hall.errors, status: :unprocessable_entity
+      render jsonapi: @cinema_hall.errors, status: :unprocessable_entity
     end
   end
 
