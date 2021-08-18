@@ -3,5 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :cinema_halls
-  resources :screenings, only: :index 
+  resources :screenings, only: :index
+  resources :movies
+  resources :tickets
 end

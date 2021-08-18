@@ -16,26 +16,26 @@ class MoviesController < ApplicationController
 
     if movie.save
       render json: movie,
-              status: :created
+             status: :created
     else
       render json: movie.errors,
-              status: :unprocessable_entity
+             status: :unprocessable_entity
     end
   end
- 
+
   def update
     movie = Movie.find(params[:id])
     if movie.update(movie_params)
       render json: :show, status: :ok
     else
       render json: movie.errors, status: :unprocessable_entity
-     end
+    end
   end
 
   def destroy
     movie = Movie.find(params[:id])
     movie.destroy
-    
+
     head :no_content
   end
 
