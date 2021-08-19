@@ -8,11 +8,12 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
-
+    reservation = [] 
     if @ticket.save
-      render json: @ticket, status: :created
+      reservation << @ticket
+      render json: reservation, status: :created
     else
-      render jsonapi: @tickets.errors, status: :unprocessable_entity
+      render json: @tickets.errors, status: :unprocessable_entity
     end
   end
 
