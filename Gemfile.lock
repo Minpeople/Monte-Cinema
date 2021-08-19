@@ -107,7 +107,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
-    pg (0.18.4)
+    pg (1.2.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -177,7 +177,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -198,13 +197,12 @@ DEPENDENCIES
   devise (~> 4.2)
   jsonapi.rb (~> 1.7)
   listen (~> 3.3)
-  pg
+  pg (~> 1.1)
   pry (~> 0.14.1)
   puma (~> 5.0)
   rails (~> 6.1.4)
   rubocop (~> 1.18, >= 1.18.4)
   spring (~> 1.7, >= 1.7.2)
-  sqlite3
   tzinfo-data
 
 RUBY VERSION
