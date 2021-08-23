@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_070102) do
+ActiveRecord::Schema.define(version: 2021_08_17_131530) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "cinema_halls", force: :cascade do |t|
     t.string "name", null: false
@@ -24,16 +27,6 @@ ActiveRecord::Schema.define(version: 2021_08_16_070102) do
     t.integer "duration", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "reservations", force: :cascade do |t|
-    t.string "status"
-    t.integer "user_id", null: false
-    t.integer "screening_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["screening_id"], name: "index_reservations_on_screening_id"
-    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "screenings", force: :cascade do |t|
@@ -54,6 +47,20 @@ ActiveRecord::Schema.define(version: 2021_08_16_070102) do
     t.index ["cinema_hall_id"], name: "index_seats_on_cinema_hall_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.float "price", null: false
+    t.integer "type"
+    t.integer "seat_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "screening_id"
+    t.index ["screening_id"], name: "index_tickets_on_screening_id"
+    t.index ["seat_id", "screening_id"], name: "index_tickets_on_seat_id_and_screening_id", unique: true
+    t.index ["seat_id"], name: "index_tickets_on_seat_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -67,8 +74,9 @@ ActiveRecord::Schema.define(version: 2021_08_16_070102) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "reservations", "screenings"
-  add_foreign_key "reservations", "users"
   add_foreign_key "screenings", "movies"
   add_foreign_key "seats", "cinema_halls"
+  add_foreign_key "tickets", "screenings"
+  add_foreign_key "tickets", "seats"
+  add_foreign_key "tickets", "users"
 end

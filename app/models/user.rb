@@ -7,5 +7,5 @@ class User < ApplicationRecord
     client: 'client',
     admin: 'admin'
   }
-  has_many :reservations
+  has_many :tickets
 end
