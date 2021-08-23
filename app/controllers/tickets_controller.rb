@@ -7,14 +7,16 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
     reservation = [] 
-    if @ticket.save
-      reservation << @ticket
-      render json: reservation, status: :created
-    else
-      render json: @tickets.errors, status: :unprocessable_entity
+    
+    @ticket = Ticket.new(ticket_params).each do 
+      if @ticket.save
+        reservation << @ticket
+      else
+        render json: @tickets.errors, status: :unprocessable_entity
+      end
     end
+    render json: reservation, status: :created
   end
 
   def update
@@ -42,6 +44,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:screening_id, :seat_id, :user_id)
+    params.require(:ticket).permit(:price, :types, :movie_id, :screening_id, :seat_id, :user_id)
   end
 end
