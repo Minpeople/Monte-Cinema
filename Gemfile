@@ -9,7 +9,7 @@ ruby '3.0.2'
 gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -21,7 +21,7 @@ gem 'puma', '~> 5.0'
 gem 'jsonapi.rb', '~> 1.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'magic_frozen_string_literal', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.2'
@@ -33,6 +33,12 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry', '~> 0.14.1'
   gem 'rubocop', '~> 1.18', '>= 1.18.4', require: false
+  gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'rspec-rails', '~> 5.0.1'
+  gem 'factory_bot'
+  gem 'rubocop-rspec', '~> 2.4.0'
+  gem 'shoulda-matchers', '~> 5.0.0'
+  gem 'simplecov', require: false
 end
 
 group :development do

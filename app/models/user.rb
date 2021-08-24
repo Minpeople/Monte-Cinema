@@ -7,5 +7,7 @@ class User < ApplicationRecord
     client: 'client',
     admin: 'admin'
   }
+  belongs_to :ticket_desk, optional: true
   has_many :tickets
+  has_many :vouchers
 end
