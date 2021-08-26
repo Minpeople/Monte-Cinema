@@ -30,12 +30,13 @@ movie3 = Movie.create(title: 'James Bond', duration: 120)
 movie4 = Movie.create(title: 'Formula 1 Drive to Survive', duration: 120)
 movie5 = Movie.create(title: 'Koe no katachi', duration: 160)
 
-first_screening = Screening.create(movie: movie4, cinema_hall: CinemaHall.find(1), date: Time.new(2021, 9, 18, 10, 00))
-second_screening = Screening.create(movie: movie2, cinema_hall: CinemaHall.find(2), date: Time.new(2021, 9, 16, 22, 00))
+first_screening = Screening.create(movie: movie4, cinema_hall: CinemaHall.find(1), date: Time.new(2021, 9, 18, 10, 0o0))
+second_screening = Screening.create(movie: movie2, cinema_hall: CinemaHall.find(2),
+                                    date: Time.new(2021, 9, 16, 22, 0o0))
 third_screening = Screening.create(movie: movie3, cinema_hall: CinemaHall.find(3), date: Time.new(2021, 9, 20, 18, 30))
-fourth_screening = Screening.create(movie: movie2, cinema_hall: CinemaHall.find(4), date: Time.new(2021, 9, 18, 23, 00))
-fifth_screening = Screening.create(movie: movie5, cinema_hall: CinemaHall.find(5), date: Time.new(2021, 9, 12, 20, 00))
-
+fourth_screening = Screening.create(movie: movie2, cinema_hall: CinemaHall.find(4),
+                                    date: Time.new(2021, 9, 18, 23, 0o0))
+fifth_screening = Screening.create(movie: movie5, cinema_hall: CinemaHall.find(5), date: Time.new(2021, 9, 12, 20, 0o0))
 
 client1 = User.create(email: 'test@asd.pl', role: 'client')
 client2 = User.create(email: 'rafaeru@wp.pl', role: 'client')
@@ -50,8 +51,12 @@ ticket_desk3 = TicketDesk.create
 ticket_desk4 = TicketDesk.create
 ticket_desk5 = TicketDesk.create
 
-ticket1 = Ticket.create(price: 12, type: 'student', client: admin2, screening: first_screening, ticket_desk: ticket_desk1 )
+ticket1 = Ticket.create(price: 12, type: 'student', client: admin2, screening: first_screening,
+                        ticket_desk: ticket_desk1)
 ticket2 = Ticket.create(price: 5, type: 'child', client: client1, screening: fifth_screening, ticket_desk: ticket_desk3)
-ticket3 = Ticket.create(price: 30, type: 'adult', client: client2, screening: second_screening, ticket_desk: ticket_desk4)
-ticket4 = Ticket.create(price: 20, type: 'senior', client: client3, screening: fourth_screening, ticket_desk: ticket_desk2)
-ticket5 = Ticket.create(price: 12, type: 'student', client: admin1, screening: fourth_screening, ticket_desk: ticket_desk1)
+ticket3 = Ticket.create(price: 30, type: 'adult', client: client2, screening: second_screening,
+                        ticket_desk: ticket_desk4)
+ticket4 = Ticket.create(price: 20, type: 'senior', client: client3, screening: fourth_screening,
+                        ticket_desk: ticket_desk2)
+ticket5 = Ticket.create(price: 12, type: 'student', client: admin1, screening: fourth_screening,
+                        ticket_desk: ticket_desk1)

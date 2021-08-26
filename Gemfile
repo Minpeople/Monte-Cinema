@@ -21,21 +21,20 @@ gem 'puma', '~> 5.0'
 gem 'jsonapi.rb', '~> 1.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'magic_frozen_string_literal', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.2'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
-
+gem 'pundit', '~> 1.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'pry', '~> 0.14.1'
-  gem 'rubocop', '~> 1.18', '>= 1.18.4', require: false
-  gem 'factory_bot_rails', '~> 6.2.0'
-  gem 'rspec-rails', '~> 5.0.1'
   gem 'factory_bot'
+  gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'pry', '~> 0.14.1'
+  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rubocop', '~> 1.18', '>= 1.18.4', require: false
   gem 'rubocop-rspec', '~> 2.4.0'
   gem 'shoulda-matchers', '~> 5.0.0'
   gem 'simplecov', require: false

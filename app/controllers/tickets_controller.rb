@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 class TicketsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @tickets = Ticket.all
+    authorize Ticket
+    @tickets = policy_scope(Ticket)
     render json: @tickets
   end
 
   def create
-    reservation = [] 
-    
-    @ticket = Ticket.new(ticket_params).each do 
+    reservation = []
+
+    @ticket = Ticket.new(ticket_params).each do
       if @ticket.save
         reservation << @ticket
       else
@@ -29,6 +31,7 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+    authorize @ticket
     render json: @ticket
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: e.message }, status: :not_found
@@ -36,6 +39,7 @@ class TicketsController < ApplicationController
 
   def destroy
     @ticket = Ticket.find(params[:id])
+    authorize @ticket
     @ticket.destroy
 
     head :no_content

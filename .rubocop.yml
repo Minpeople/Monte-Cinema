@@ -1,0 +1,13 @@
+require: rubocop-rspec
+Style/Documentation:
+  Enabled: false
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - 'bin/*'
+    - 'lib/tasks/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'config/**/*'
+    - 'spec/rails_helper.rb'

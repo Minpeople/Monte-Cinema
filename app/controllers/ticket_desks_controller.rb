@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 class TicketDesksController < ApplicationController
-  before_action :only => [:index, :show] do
-    redirect_to new_user_session_path unless current_user && current_user.role('admin)')
-  end
+  after_action :verify_policy_scoped, only: :index, :show
+  skip_after_action :verify_authorized, only: :index, :show
 
   def index
-    @ticket_desks = TicketDesk.all
-    render json: @ticket_desks
+    if user_signed_in?
+      @ticket_desks = policy_scope(TicketDesk)
+      render json: @ticket_desks
+    else 
+      render json: @ticket_desk.errors,
+              status: :unprocessable_entity
   end
 
   def create
@@ -25,12 +28,11 @@ class TicketDesksController < ApplicationController
   def show
     @ticket_desk = TicketDesk.find(params[:id])
     render json: @ticket_desk
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { error: e.message }, 
-          status: :not_found
   end
 
   def update
+    ticket_desk = TicketDesk.find(params[:id])
+    authorize ticket_desk
     if @ticket_desk.update(ticket_desk_params)
     render json: :show, 
           status: :ok

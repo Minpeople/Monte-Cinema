@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 class VouchersController < ApplicationController
-  before_action :only => [:show] do
-    redirect_to new_user_session_path unless current_user && current_user.role('admin)')
-  end
-  
   def index
-    @vouchers = Voucher.all
+    @vouchers = current_user.vouchers
     render json: @vouchers
   end
 
   def show
-    @voucher = Voucher.find(params[:id])
+    @voucher = current_user.voucher
     render json: @voucher
   end
 
@@ -19,16 +15,16 @@ class VouchersController < ApplicationController
     @voucher = Voucher.new(voucher_params)
 
     if @voucher.save
-      render json: @voucher
-              status: :created
+      render json: @voucher,
+             status: :created
     else
-      render json: @voucher
-      status: :unprocessable_entity
+      render json: @voucher,
+             status: :unprocessable_entity
     end
   end
 
   def update
-    @voucher = Voucher.find(params[:id])
+    @voucher = current_user.voucher
     if @voucher.update(voucher_params)
       render json: :show, status: :ok
     else
@@ -37,7 +33,7 @@ class VouchersController < ApplicationController
   end
 
   def destroy
-    @voucher = Voucher.find(params[:id])
+    @voucher = current_user.voucher
     @voucher.destroy
 
     head :no_content
@@ -49,4 +45,3 @@ class VouchersController < ApplicationController
     params.require(:voucher).permit(:discount)
   end
 end
-  

@@ -2,11 +2,11 @@
 
 module Vouchers
   class GenerateVouchers
-    def generate
-      @voucher = Voucher.find(params[:id])
+    def generate(voucher_id, ticket_id)
+      @voucher = Voucher.find(voucher_id)
       discount = @voucher.discount
-      @ticket = Ticket.find(params[:id])
-      discount += @ticket.price 
-      end
+      @ticket = Ticket.find(ticket_id)
+      discount += @ticket.price
+    end
   end
 end
