@@ -2,6 +2,7 @@
 
 class TicketsController < ApplicationController
   before_action :authenticate_user!
+
   def index
     authorize Ticket
     @tickets = policy_scope(Ticket)
@@ -9,16 +10,14 @@ class TicketsController < ApplicationController
   end
 
   def create
-    reservation = []
-
-    @ticket = Ticket.new(ticket_params).each do
+    @ticket = Ticket.new(ticket_params)
       if @ticket.save
-        reservation << @ticket
+        render json: @ticket, status: :created
       else
         render json: @tickets.errors, status: :unprocessable_entity
       end
-    end
-    render json: reservation, status: :created
+  
+    render json: ticket, status: :created
   end
 
   def update
@@ -48,6 +47,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:price, :types, :movie_id, :screening_id, :seat_id, :user_id)
+    params.require(:ticket).permit(array: [:price, :types, :movie_id, :screening_id, :seat_id, :user_id])
   end
 end
