@@ -7,7 +7,7 @@ class VouchersController < ApplicationController
   end
 
   def show
-    @voucher = current_user.voucher
+    @voucher = current_user.vouchers.find(params[:id])
     render json: @voucher
   end
 
@@ -24,7 +24,7 @@ class VouchersController < ApplicationController
   end
 
   def update
-    @voucher = current_user.voucher
+    @voucher = current_user.vouchers.find(params[:id])
     if @voucher.update(voucher_params)
       render json: :show, status: :ok
     else
