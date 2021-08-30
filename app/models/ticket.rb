@@ -5,5 +5,5 @@ class Ticket < ApplicationRecord
   belongs_to :screening
   belongs_to :ticket_desk
   STATUS = %w[reserved cancelled paid].freeze
-  TYPE = %w[adult child student senior].freeze
+  TYPES = %w[adult child student senior].freeze
 end
