@@ -26,8 +26,8 @@ class TicketsController < ApplicationController
     end
   end
 
-  def cancell
-    render json:Tickets::CancellUnpaidTickets.new.call
+  def cancel
+    render json:Tickets::CancelUnpaidTickets.new.call
   end
 
   def show
