@@ -4,15 +4,15 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user_id == user.id || user.admin?
+    record.user == user|| user.admin?
   end
 
   def update?
-    user.admin?
+    record.user == user || user.admin?
   end
 
   def destroy?
-    record.user_id == user.id || user.admin?
+    record.user == user || user.admin?
   end
 
   class Scope

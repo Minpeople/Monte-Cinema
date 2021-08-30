@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized
   def index
-    authorize :user, :index?
+    authorize :user
     @users = policy_scope(User)
     @users = User.all
   end
