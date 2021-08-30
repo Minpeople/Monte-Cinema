@@ -5,6 +5,5 @@ class ApplicationController < ActionController::API
 
   protect_from_forgery
   before_action :authenticate_user!
-  after_action :verify_authorized
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 end
