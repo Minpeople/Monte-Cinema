@@ -3,8 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe Movie, type: :model do
-  it 'has a title' do
-    movie = Movie.create!(title: 'Harry Potter', duration: 120)
-    expect(movie.title).to eq('Harry Potter')
+  subject { build(:movie) }
+
+  context 'title validation' do
+    it { is_expected.to validate_presence_of(:title) }
+  end
+
+  context 'duration validation' do
+    it { is_expected.to validate_presence_of(:duration) }
+  end
+
+  context 'screenings association' do
+    it { is_expected.to have_many(:screenings) }
   end
 end

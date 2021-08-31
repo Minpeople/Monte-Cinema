@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: {
-    client: 'client',
-    admin: 'admin'
+    client: 0,
+    admin: 1
   }
   belongs_to :ticket_desk, optional: true
   has_many :tickets
