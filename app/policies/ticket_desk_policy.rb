@@ -20,12 +20,16 @@ class TicketDeskPolicy < ApplicationPolicy
     end
 
     def update?
-      user_signed_in? && user.admin?
+      user.client? || user.admin?
+    end
+
+    def destroy?
+      user.client? || user.admin?
     end
 
     private
     def authorization?
-      user_signed_in? && user.admin?
+       user.admin?
     end
   end
 end

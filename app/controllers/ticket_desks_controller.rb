@@ -42,9 +42,8 @@ class TicketDesksController < ApplicationController
   end
 
   def destroy
-    if user_signed_in? && user.admin?
-      @ticket_desk = TicketDesk.find(params[:id])
-      @ticket_desk.destroy
+    ticket_desk = authorize TicketDesk.find(params[:id])
+    ticket_desk.destroy
 
       head :no_content
     end
