@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_131530) do
+ActiveRecord::Schema.define(version: 2021_08_30_105053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 2021_08_17_131530) do
     t.index ["cinema_hall_id"], name: "index_seats_on_cinema_hall_id"
   end
 
+  create_table "ticket_desks", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "category"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.float "price", null: false
     t.integer "type"
@@ -55,9 +61,11 @@ ActiveRecord::Schema.define(version: 2021_08_17_131530) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "screening_id"
+    t.bigint "ticket_desk_id"
     t.index ["screening_id"], name: "index_tickets_on_screening_id"
     t.index ["seat_id", "screening_id"], name: "index_tickets_on_seat_id_and_screening_id", unique: true
     t.index ["seat_id"], name: "index_tickets_on_seat_id"
+    t.index ["ticket_desk_id"], name: "index_tickets_on_ticket_desk_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
@@ -70,13 +78,26 @@ ActiveRecord::Schema.define(version: 2021_08_17_131530) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "role", default: "client"
+    t.bigint "ticket_desk_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["ticket_desk_id"], name: "index_users_on_ticket_desk_id"
+  end
+
+  create_table "vouchers", force: :cascade do |t|
+    t.integer "discount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_vouchers_on_user_id"
   end
 
   add_foreign_key "screenings", "movies"
   add_foreign_key "seats", "cinema_halls"
   add_foreign_key "tickets", "screenings"
   add_foreign_key "tickets", "seats"
+  add_foreign_key "tickets", "ticket_desks"
   add_foreign_key "tickets", "users"
+  add_foreign_key "users", "ticket_desks"
+  add_foreign_key "vouchers", "users"
 end
