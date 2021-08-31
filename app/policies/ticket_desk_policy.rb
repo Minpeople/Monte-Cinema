@@ -7,7 +7,11 @@ class TicketDeskPolicy < ApplicationPolicy
       @scope = scope
     end
 
-    def resolve
+    def create?
+      authorization?
+    end
+
+    def resolve?
       if user.admin?
         scope.all
       else
@@ -16,7 +20,16 @@ class TicketDeskPolicy < ApplicationPolicy
     end
 
     def update?
-      resource.user == user
+      user.client? || user.admin?
+    end
+
+    def destroy?
+      user.client? || user.admin?
+    end
+
+    private
+    def authorization?
+       user.admin?
     end
   end
 end

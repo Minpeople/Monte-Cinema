@@ -22,6 +22,11 @@ class VouchersController < ApplicationController
              status: :unprocessable_entity
     end
   end
+  
+  def upgrade
+    voucher = current_user.voucher.find(params[:id])
+    voucher = Vouchers::GenerateDiscount.new.discount(voucher_id, ticket_id)
+  end
 
   def update
     @voucher = current_user.vouchers.find(params[:id])

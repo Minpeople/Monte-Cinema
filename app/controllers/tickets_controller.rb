@@ -16,8 +16,6 @@ class TicketsController < ApplicationController
       else
         render json: @tickets.errors, status: :unprocessable_entity
       end
-  
-    render json: ticket, status: :created
   end
 
   def update
@@ -26,6 +24,10 @@ class TicketsController < ApplicationController
     else
       render json: @ticket.errors, status: :unprocessable_entity
     end
+  end
+
+  def cancel
+    render json:Tickets::CancelUnpaidTickets.new.call
   end
 
   def show
