@@ -15,7 +15,7 @@ cinema_halls_list = [
 
 cinema_halls_list.each do |cinema_hall_parameters|
   cinema_hall = CinemaHall.create(cinema_hall_parameters)
-  seats = CinemaHalls::GenerateSeats.new.generate_seats(cinema_hall.capacity)
+  seats = CinemaHalls::UseCases::GenerateSeats.new.generate_seats(cinema_hall.capacity)
 
   seats.each do |seat|
     cinema_hall.seats.create(code: seat)
