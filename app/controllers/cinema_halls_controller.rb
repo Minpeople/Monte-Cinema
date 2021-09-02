@@ -28,7 +28,6 @@ class CinemaHallsController < ApplicationController
 
   def update
     cinema_hall = CinemaHalls::UseCases::Update.new(id: params[:id], params: cinema_hall_params).call
-    if cinema_hall.update(cinema_hall_params)
       render json: :show, status: :ok
     else
       render json: cinema_hall.errors, status: :unprocessable_entity
