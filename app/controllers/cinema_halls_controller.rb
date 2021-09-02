@@ -4,41 +4,39 @@ class CinemaHallsController < ApplicationController
   include JSONAPI::Fetching
 
   def index
-    @cinema_halls = CinemaHalls::Representers::Multiple.new.call
-    render jsonapi: @cinema_halls
+    cinema_halls = CinemaHall.all
+    render json: CinemaHalls::Representers::Multiple.new(cinema_halls).call
   end
 
   def create
-    @cinema_hall = CinemaHalls::UseCases::Create.new(params: cinema_hall_params).call
+    cinema_hall = CinemaHalls::UseCases::Create.new(params: cinema_hall_params).call
 
     if @cinema_hall.save
-      render jsonapi: @cinema_halls,
+      render json: cinema_halls,
              status: :created
     else
-      render jsonapi: @cinema_halls.errors,
+      render json: cinema_halls.errors,
              status: :unprocessable_entity
     end
   end
 
   def show
-    @cinema_hall = CinemaHalls::Representers::Single.new(id: params[:id]).call
-    render jsonapi: @cinema_hall
+    cinema_hall = CinemaHalls::Representers::Single.new(cinema_hall).call
   rescue ActiveRecord::RecordNotFound => e
-    render jsonapi: { error: e.message }, status: :not_found
+    render json: { error: e.message }, status: :not_found
   end
 
   def update
-    @cinema_hall = CinemaHalls::UseCases::Update.new(id: params[:id], params: cinema_hall_params).call
-    if @cinema_hall.update(cinema_hall_params)
-      render jsonapi: :show, status: :ok
+    cinema_hall = CinemaHalls::UseCases::Update.new(id: params[:id], params: cinema_hall_params).call
+    if cinema_hall.update(cinema_hall_params)
+      render json: :show, status: :ok
     else
-      render jsonapi: @cinema_hall.errors, status: :unprocessable_entity
+      render json: cinema_hall.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @cinema_hall = CinemaHalls::UseCases::Delete.new(id: params[:id]).call
-    @cinema_hall.destroy
+    CinemaHalls::UseCases::Delete.new(id: params[:id]).call
 
     head :no_content
   end
