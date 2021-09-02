@@ -11,7 +11,7 @@ class CinemaHallsController < ApplicationController
   def create
     cinema_hall = CinemaHalls::UseCases::Create.new(params: cinema_hall_params).call
 
-    if @cinema_hall.save
+    if cinema_hall.valid?
       render json: cinema_halls,
              status: :created
     else
