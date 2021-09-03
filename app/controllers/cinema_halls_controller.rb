@@ -1,43 +1,41 @@
 # frozen_string_literal: true
 
 class CinemaHallsController < ApplicationController
-  include JSONAPI::Fetching
 
   def index
-    @cinema_halls = CinemaHall.all
-    render jsonapi: @cinema_halls
+    cinema_halls = CinemaHall.all
+    render json: CinemaHalls::Representers::Multiple.new(cinema_halls).call
   end
 
   def create
-    @cinema_hall = CinemaHall.new(cinema_hall_params)
+    cinema_hall = CinemaHalls::UseCases::Create.new(params: cinema_hall_params).call
 
-    if @cinema_hall.save
-      render jsonapi: @cinema_halls,
+    if cinema_hall.valid?
+      render json: cinema_halls,
              status: :created
     else
-      render jsonapi: @cinema_halls.errors,
+      render json: cinema_halls.errors,
              status: :unprocessable_entity
     end
   end
 
   def show
-    @cinema_hall = CinemaHall.find(params[:id])
-    render jsonapi: @cinema_hall
-  rescue ActiveRecord::RecordNotFound => e
-    render jsonapi: { error: e.message }, status: :not_found
+    cinema_hall =  CinemaHalls::UseCases::Find.new.call(id: params[:id])
+    render json: CinemaHalls::Representers::Single.new(cinema_hall).call
   end
 
   def update
-    if @cinema_hall.update(cinema_hall_params)
-      render jsonapi: :show, status: :ok
-    else
-      render jsonapi: @cinema_hall.errors, status: :unprocessable_entity
+    cinema_hall = CinemaHalls::UseCases::Update.new(id: params[:id], params: cinema_hall_params).call
+      if cinema_hall.valid?
+        render json: :show, 
+        status: :ok
+      else
+      render json: cinema_hall.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @cinema_hall = CinemaHall.find(params[:id])
-    @cinema_hall.destroy
+    CinemaHalls::UseCases::Delete.new(id: params[:id]).call
 
     head :no_content
   end
