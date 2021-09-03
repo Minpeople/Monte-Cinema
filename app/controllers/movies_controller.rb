@@ -3,18 +3,18 @@
 class MoviesController < ApplicationController
   def index
     movies = Movie.all
-    render json: movies
+    render json: Movies::Representers::Multiple.new(movies).call
   end
 
   def show
-    movie = Movie.find(params[:id])
-    render json: movie
+    movie = Movies::UseCases::Find.new(id: params[:id]).call
+    render json: Movies::Representers::Single.new(movie).call
   end
 
   def create
-    movie = Movie.new(movie_params)
+    movie = Movies::UseCases::Create.new(params: movie_params).call
 
-    if movie.save
+    if movie.valid?
       render json: movie,
              status: :created
     else
@@ -24,17 +24,18 @@ class MoviesController < ApplicationController
   end
 
   def update
-    movie = Movie.find(params[:id])
-    if movie.update(movie_params)
-      render json: :show, status: :ok
+    movie = Movies::UseCases::Update.new(id: params[:id], params: movie_params).call
+    if movie.valid?
+      render json: :show, 
+      status: :ok
     else
-      render json: movie.errors, status: :unprocessable_entity
+      render json: movie.errors, 
+      status: :unprocessable_entity
     end
   end
 
   def destroy
-    movie = Movie.find(params[:id])
-    movie.destroy
+    Movies::UseCases::Delete.new(id: params[:id]).call
 
     head :no_content
   end
