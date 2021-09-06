@@ -5,7 +5,7 @@ module Movies
     class Create
       def initialize(params:, repository: Movies::Repository.new)
         @repository = repository
-        @params =params
+        @params = params
       end
 
       def call(params:)
