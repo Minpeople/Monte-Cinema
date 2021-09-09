@@ -2,7 +2,7 @@
 
 class TicketsController < ApplicationController
   before_action :authenticate_user!
-
+  
   def index
     authorize Ticket
     @tickets = policy_scope(Ticket)
@@ -13,6 +13,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
       if @ticket.save
         render json: @ticket, status: :created
+        TicketMailer.confirm_email(current_user.email, ticket).deliver_now
       else
         render json: @tickets.errors, status: :unprocessable_entity
       end

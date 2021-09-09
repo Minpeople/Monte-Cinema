@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    <h2>Hey, </h2>
+    <p> You have successfully bought ticket for <span style="color:red;">
+    <%= Ticket.first.screening.movie.title %> </span>.
+    </p>
+    <p>
+      There are your ticket details:
+    </p>
+    <p> <strong>Your ticket ID is <%= Ticket.first.id %>. </strong> </p>
+    <p> You will watch the movie in hall <strong> <%= Ticket.first.screening.cinema_hall.name %> </strong>.
+   <p> Your movie starts at <strong> <%= Ticket.first.screening.date %> </strong></p>
+   <p> Please remember to arrive <strong> 30 minutes </strong> before the screening and pay for the ticket.</p>
+  <p>Thanks and have a great day!</p>
+  <h2 style="color:black"> Monte<span style="color:red;">Cinema</span></h2>
+  </body>
+</html>

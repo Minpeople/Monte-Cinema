@@ -38,6 +38,8 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.4.0'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
+  gem 'letter_opener', '~> 1.4', '>= 1.4.1' 
+  gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 end
 
 group :development do
@@ -48,3 +50,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem "rqrcode", "~> 2.0"
