@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CinemaHallsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     cinema_halls = CinemaHall.all

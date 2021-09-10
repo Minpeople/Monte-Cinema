@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_101722) do
+ActiveRecord::Schema.define(version: 2021_09_08_103957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_101722) do
     t.integer "user_id"
     t.integer "screening_id"
     t.bigint "ticket_desk_id"
+    t.string "code"
     t.index ["screening_id"], name: "index_tickets_on_screening_id"
     t.index ["seat_id", "screening_id"], name: "index_tickets_on_seat_id_and_screening_id", unique: true
     t.index ["seat_id"], name: "index_tickets_on_seat_id"

@@ -1,0 +1,11 @@
+Hey,
+You have successfully bought ticket for  
+There are your ticket details:
+
+Your ticket ID is <%= Ticket.first.id %>.
+You will watch the movie in hall <%= Ticket.first.screening.cinema_hall.name %>
+Your movie starts at <%= Ticket.first.screening.date %>
+
+Please remember to arrive 30 minutes before the screening and pay for the ticket. 
+Thanks and have a great day!
+MonteCinema
