@@ -30,13 +30,16 @@ movie3 = Movie.create!(title: 'James Bond', duration: 120)
 movie4 = Movie.create!(title: 'Formula 1 Drive to Survive', duration: 120)
 movie5 = Movie.create!(title: 'Koe no katachi', duration: 160)
 
-first_screening = Screening.create!(movie: movie4, cinema_hall: CinemaHall.find(1), date: Time.new(2021, 9, 18, 10, 0o0))
+first_screening = Screening.create!(movie: movie4, cinema_hall: CinemaHall.find(1), 
+                                    date: Time.new(2021, 9, 18, 10, 0o0))
 second_screening = Screening.create!(movie: movie2, cinema_hall: CinemaHall.find(2),
                                     date: Time.new(2021, 9, 16, 22, 0o0))
-third_screening = Screening.create!(movie: movie3, cinema_hall: CinemaHall.find(3), date: Time.new(2021, 9, 20, 18, 30))
+third_screening = Screening.create!(movie: movie3, cinema_hall: CinemaHall.find(3), 
+                                    date: Time.new(2021, 9, 20, 18, 30))
 fourth_screening = Screening.create!(movie: movie2, cinema_hall: CinemaHall.find(4),
                                     date: Time.new(2021, 9, 18, 23, 0o0))
-fifth_screening = Screening.create!(movie: movie5, cinema_hall: CinemaHall.find(5), date: Time.new(2021, 9, 12, 20, 0o0))
+fifth_screening = Screening.create!(movie: movie5, cinema_hall: CinemaHall.find(5), 
+                                    date: Time.new(2021, 9, 12, 20, 0o0))
 
 client1 = User.create!(email: 'test@asd.pl', password: "test123", role: 'client')
 client2 = User.create!(email: 'rafaeru@wp.pl', password: "test123", role: 'client')
@@ -49,11 +52,10 @@ ticket_desk1 = TicketDesk.create!
 ticket_desk2 = TicketDesk.create!
 ticket_desk3 = TicketDesk.create!
 ticket_desk4 = TicketDesk.create!
-ticket_desk5 = TicketDesk.create!
 
 ticket9 = Ticket.create!(price: 12, user_id: 5, screening: first_screening,
                         ticket_desk: ticket_desk1, seat_id: 7)
-ticket2 = Ticket.create(price: 5,  user_id: 4, screening: fifth_screening, 
+ticket2 = Ticket.create(price: 5, user_id: 4, screening: fifth_screening, 
                         ticket_desk: ticket_desk3, seat_id: 8)
 ticket3 = Ticket.create(price: 30,  user_id: 6, screening: second_screening,
                         ticket_desk: ticket_desk4, seat_id: 9)
